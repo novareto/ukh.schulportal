@@ -4,6 +4,7 @@
 
 import grok
 import uvcsite
+from uvcsite.content.productregistration import getProductRegistrations
 
 
 grok.templatedir('templates')
@@ -13,5 +14,9 @@ class LandingPage(uvcsite.Page):
     grok.context(uvcsite.IUVCSite)
     grok.name('index')
 
-    def update(self):
-        import pdb; pdb.set_trace() 
+    def getItems(self):
+        print dict([x for x in getProductRegistrations()])
+        return dict([x for x in getProductRegistrations()])
+
+    def getHomeFolder(self):
+        return uvcsite.getHomeFolderUrl(self.request)

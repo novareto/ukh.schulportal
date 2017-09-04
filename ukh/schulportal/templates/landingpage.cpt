@@ -1,2 +1,36 @@
-<h1> Schulportal </h1>
-<p class="lead"> DAS IST DAS NEUE SCHULPORTAL </p>
+<div id="landingpage" class="row" tal:define="items view.getItems()">
+   <div class="row ">
+     <h3>Bitte wählen Sie einen Bereich aus:</h3>
+   </div>
+
+   <div tal:condition="'KinderUnfallanzeige' in items.keys()">
+    <div class="row ">
+      <div class="col-md-6" tal:condition="item" tal:define="item items.get('KinderUnfallanzeige')">
+        <a href="" tal:attributes="href item.action()">
+          <img class="img-responsive" src="" tal:attributes="src item.icon" />
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="" tal:attributes="href view.getHomeFolder() + '/Sunfallanzeigen/addverbandsbuch'">
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/uaz_ki.png'" />
+        </a>
+      </div>
+    </div>
+  </div>
+   <div>
+    <div class="row ">
+      <div class="col-md-6">
+        <a href="" tal:attributes="href view.getHomeFolder()">
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/ihre_daten.png'" />
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="" tal:attributes="href view.getHomeFolder() + '/erstehilfe'">
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/ihre_daten.png'" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
