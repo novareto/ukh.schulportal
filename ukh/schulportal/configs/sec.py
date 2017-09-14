@@ -19,7 +19,6 @@ class CoUserRole(grok.Role):
 
 class SpecialSecurity(ExtraRoleMap, grok.Adapter):
     grok.context(uvcsite.IContent)
-    grok.baseclass()
 
     def _compute_extra_data(self):
         extra_map = SecurityMap()

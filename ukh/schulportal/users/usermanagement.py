@@ -11,8 +11,9 @@ from zope.pluggableauth.interfaces import IPrincipalInfo, AuthenticatedPrincipal
 
 from sqlalchemy import and_
 from z3c.saconfig import Session
-from ukh.schulportal.configs.database_setup import users
+from ukh.schulportal.configs.database_setup import users, einrichtungen
 from zope.sqlalchemy import mark_changed
+from sqlalchemy.sql import select, and_
 
 
 class User(dict):
@@ -32,7 +33,7 @@ class UserManagement(grok.GlobalUtility):
         session = Session()
         sql = users.update().where(
             and_(users.c.login == mnr, users.c.az == az)
-            ).values(passwort=kwargs.get('passwort'))  # , =','.join(kw.get('rollen')))
+            ).values(passwort=kwargs.get('passwort'), rollen=','.join(kwargs.get('rollen')))
         session.execute(sql)
         mark_changed(session)
 
@@ -54,6 +55,7 @@ class UserManagement(grok.GlobalUtility):
             az=az,
             email=kw.get('email', ''),
             oid=str(user['oid']),
+            rollen=','.join(kw.get('rollen', []))
             )
         )
         session.execute(sql)
@@ -75,6 +77,7 @@ class UserManagement(grok.GlobalUtility):
         if query.count() == 1:
             result = query.one()
             az = result.az
+            #import pdb; pdb.set_trace()
             if result.az == 'eh':
                 az = '00'
             return User(
@@ -83,7 +86,7 @@ class UserManagement(grok.GlobalUtility):
                 oid=result.oid,
                 email=result.email,
                 passwort=result.passwort,
-                rollen=[])
+                rollen=result.rollen.strip().split(','))
         return None
 
     def getUsersByMnr(self, mnr):
@@ -105,7 +108,7 @@ class UserManagement(grok.GlobalUtility):
                 oid=result.oid,
                 email=result.email,
                 passwort=result.passwort,
-                rollen=[])
+                rollen=result.rollen)
         return None
 
     def getUserGroups(self, mnr):
@@ -118,7 +121,7 @@ class UserManagement(grok.GlobalUtility):
                 continue
             usr = "%s-%s" % (x.login, x.az)
             ret.append(User(
-                cn=usr, mnr=x.login, rollen=x.merkmal or [], az=x.az))
+                cn=usr, mnr=x.login, rollen=x.rollen.strip().split(','), az=x.az))
         return ret
 
     def updatePasswort(self, **kwargs):
@@ -129,18 +132,59 @@ class UserManagement(grok.GlobalUtility):
         return True
 
 
-class UVCPrincipal(Principal):
-
-    foo = u"bar"
+from zope.component import getUtility
 
 
-class MyOwnPrincpalFactory(AuthenticatedPrincipalFactory, grok.MultiAdapter):
+class UKHPrincipal(Principal):
+
+    def __init__(self, id, description):
+        self.id = id
+        self.description = description
+        self.groups = []
+
+    @property
+    def title(self):
+        return self.getAdresse().get('iknam1', self.id)
+
+    def getOID(self, id=None):
+        """
+        Gibt die eindeutige OID fuer einen Mitgliedsbetrieb zurueck
+        """
+        if not id:
+            id = self.id
+        um = getUtility(IUserManagement)
+        usr = um.getUser(id)
+        return usr.get('oid', '')
+
+    def getAdresse(self):
+        """
+        Holt die Adresse und die Bankverbindung aus der Datenbank
+        """
+        id = self.id
+        oid = self.getOID(id)
+        session = Session()
+        s = select([einrichtungen], and_(einrichtungen.c.enrrcd == str(oid)))
+        res = session.execute(s).fetchone()
+        d = dict()
+        if not res:
+            return d
+        for k, v in res.items():
+            if isinstance(v, str):
+                d[k.lower()] = v.strip()
+            if isinstance(v, unicode):
+                d[k.lower()] = v.strip()
+            else:
+                d[k.lower()] = v
+        return d
+
+
+class UKHPrincpalFactory(AuthenticatedPrincipalFactory, grok.MultiAdapter):
     grok.adapts(IPrincipalInfo, ILayer)
 
+
     def __call__(self, authentication):
-        principal = UVCPrincipal(
+        principal = UKHPrincipal(
             authentication.prefix + self.info.id,
-            self.info.title,
             self.info.description)
         grok.notify(AuthenticatedPrincipalCreated(
             authentication, principal, self.info, self.request))

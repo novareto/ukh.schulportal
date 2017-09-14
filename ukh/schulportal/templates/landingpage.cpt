@@ -1,9 +1,8 @@
 <div id="landingpage" class="row" tal:define="items view.getItems()">
-   <div class="row ">
-     <h3>Bitte wählen Sie einen Bereich aus:</h3>
-   </div>
-
-   <div tal:condition="'KinderUnfallanzeige' in items.keys()">
+  <div class="row ">
+    <h3>Bitte wählen Sie einen Bereich aus:</h3>
+  </div>
+  <div tal:condition="'KinderUnfallanzeige' in items.keys()">
     <div class="row ">
       <div class="col-md-6" tal:condition="item" tal:define="item items.get('KinderUnfallanzeige')">
         <a href="" tal:attributes="href item.action()">
@@ -12,25 +11,32 @@
       </div>
       <div class="col-md-6">
         <a href="" tal:attributes="href view.getHomeFolder() + '/Sunfallanzeigen/addverbandsbuch'">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/uaz_ki.png'" />
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/Verbandsbuch.png'" />
         </a>
       </div>
     </div>
   </div>
-   <div>
+  <div>
     <div class="row ">
       <div class="col-md-6">
         <a href="" tal:attributes="href view.getHomeFolder()">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/ihre_daten.png'" />
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/MeinOrdner.png'" />
         </a>
       </div>
       <div class="col-md-6">
         <a href="" tal:attributes="href view.getHomeFolder() + '/erstehilfe'">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/ihre_daten.png'" />
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/ErsteHilfe.png'" />
         </a>
       </div>
     </div>
+    <div>
+      <div class="row ">
+        <div class="col-md-6">
+          <a href="" tal:attributes="href view.getHomeFolder() + '/Mitteilung-an-ukh/add'">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/ihre_nachricht.png'" />
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-
-
 </div>

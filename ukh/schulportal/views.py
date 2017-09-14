@@ -15,8 +15,11 @@ class LandingPage(uvcsite.Page):
     grok.name('index')
 
     def getItems(self):
-        print dict([x for x in getProductRegistrations()])
-        return dict([x for x in getProductRegistrations()])
+        items = dict([x for x in getProductRegistrations()])
+        return items
 
     def getHomeFolder(self):
         return uvcsite.getHomeFolderUrl(self.request)
+
+    def update(self):
+        print self.request.principal.getAdresse()
