@@ -26,6 +26,7 @@ setup(name='ukh.schulportal',
           'uvc.configpanel',
           'ukh.ibmdbsa',
           'z3c.saconfig',
+          'lovely.memcached',
           # -*- Extra requirements: -*-
       ],
       entry_points={
