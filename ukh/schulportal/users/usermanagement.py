@@ -13,7 +13,7 @@ from sqlalchemy import and_
 from z3c.saconfig import Session
 from ukh.schulportal.configs.database_setup import users, einrichtungen
 from zope.sqlalchemy import mark_changed
-from sqlalchemy.sql import select, and_
+from sqlalchemy.sql import select
 
 
 class User(dict):
@@ -133,6 +133,13 @@ class UserManagement(grok.GlobalUtility):
 
 
 from zope.component import getUtility
+from ukh.schulportal.configs.cache import cacheme
+
+
+def cachekey(func, self):
+    key = "%s_%s" % (self.__class__.__name__, self.id)
+    print "KEY", key
+    return key
 
 
 class UKHPrincipal(Principal):
@@ -156,6 +163,7 @@ class UKHPrincipal(Principal):
         usr = um.getUser(id)
         return usr.get('oid', '')
 
+    @cacheme(cachekey)
     def getAdresse(self):
         """
         Holt die Adresse und die Bankverbindung aus der Datenbank
@@ -180,7 +188,6 @@ class UKHPrincipal(Principal):
 
 class UKHPrincpalFactory(AuthenticatedPrincipalFactory, grok.MultiAdapter):
     grok.adapts(IPrincipalInfo, ILayer)
-
 
     def __call__(self, authentication):
         principal = UKHPrincipal(
