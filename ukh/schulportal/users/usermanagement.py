@@ -14,6 +14,8 @@ from z3c.saconfig import Session
 from ukh.schulportal.configs.database_setup import users, einrichtungen
 from zope.sqlalchemy import mark_changed
 from sqlalchemy.sql import select
+from zope.component import getUtility
+from uvc.cache import cache_me
 
 
 class User(dict):
@@ -132,13 +134,8 @@ class UserManagement(grok.GlobalUtility):
         return True
 
 
-from zope.component import getUtility
-from ukh.schulportal.configs.cache import cacheme
-
-
 def cachekey(func, self):
     key = "%s_%s" % (self.__class__.__name__, self.id)
-    print "KEY", key
     return key
 
 
@@ -153,17 +150,20 @@ class UKHPrincipal(Principal):
     def title(self):
         return self.getAdresse().get('iknam1', self.id)
 
+    def getUM(self):
+        return getUtility(IUserManagement)
+
     def getOID(self, id=None):
         """
         Gibt die eindeutige OID fuer einen Mitgliedsbetrieb zurueck
         """
         if not id:
             id = self.id
-        um = getUtility(IUserManagement)
+        um = self.getUM()
         usr = um.getUser(id)
         return usr.get('oid', '')
 
-    @cacheme(cachekey)
+    @cache_me(cachekey)
     def getAdresse(self):
         """
         Holt die Adresse und die Bankverbindung aus der Datenbank

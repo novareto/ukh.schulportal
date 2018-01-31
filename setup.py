@@ -23,10 +23,9 @@ setup(name='ukh.schulportal',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'uvc.configpanel',
           'ukh.ibmdbsa',
           'z3c.saconfig',
-          'lovely.memcached',
+          'uvc.cache',
           # -*- Extra requirements: -*-
       ],
       entry_points={

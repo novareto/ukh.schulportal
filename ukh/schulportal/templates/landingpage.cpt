@@ -1,42 +1,137 @@
 <div id="landingpage" class="row" tal:define="items view.getItems()">
-  <div class="row ">
-    <h3>Bitte wählen Sie einen Bereich aus:</h3>
-  </div>
-  <div tal:condition="'KinderUnfallanzeige' in items.keys()">
+  <h1>Willkommen im Schulportal der Unfallkasse Hessen</h1>
+  <div class="row col-md-8">
     <div class="row ">
-      <div class="col-md-6" tal:condition="item" tal:define="item items.get('KinderUnfallanzeige')">
-        <a href="" tal:attributes="href item.action()">
-          <img class="img-responsive" src="" tal:attributes="src item.icon" />
-        </a>
-      </div>
-      <div class="col-md-6">
-        <a href="" tal:attributes="href view.getHomeFolder() + '/Sunfallanzeigen/addverbandsbuch'">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/Verbandsbuch.png'" />
-        </a>
+      <h3>Bitte wählen Sie einen Bereich aus:</h3>
+    </div>
+    <div tal:condition="'KinderUnfallanzeige' in items.keys()">
+      <div class="row ">
+        <div class="col-md-6" tal:condition="item" tal:define="item items.get('KinderUnfallanzeige')">
+          <a href="" tal:attributes="href item.action()">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/unfallanzeige_gruen.png'" />
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="" tal:attributes="href view.getHomeFolder() + '/Sunfallanzeigen/addverbandbuch'">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/verbandbuch_gruen.png'" />
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div class="row ">
-      <div class="col-md-6">
-        <a href="" tal:attributes="href view.getHomeFolder()">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/MeinOrdner.png'" />
-        </a>
-      </div>
-      <div class="col-md-6">
-        <a href="" tal:attributes="href view.getHomeFolder() + '/erstehilfe'">
-          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/ErsteHilfe.png'" />
-        </a>
-      </div>
+      <br>
     </div>
     <div>
       <div class="row ">
         <div class="col-md-6">
-          <a href="" tal:attributes="href view.getHomeFolder() + '/Mitteilung-an-ukh/add'">
-            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.spsuaz/ihre_nachricht.png'" />
+          <a href="" tal:attributes="href view.getHomeFolder() + '/Letterbasket/add'">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/postkorb_gruen.png'" />
+          </a>
+          <!--
+          <a href="" tal:attributes="href view.getHomeFolder()">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/meinordner_gruen.png'" />
+          </a>
+          -->
+        </div>
+        <div class="col-md-6">
+          <a href="" tal:attributes="href view.getHomeFolder() + '/erstehilfeexternal'">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/erstehilfe_gruen.png'" />
+          </a>
+        </div>
+      </div>
+    <div class="row ">
+      <br>
+    </div>
+    <div>
+      <div class="row ">
+        <div class="col-md-6">
+          <a href="http://www.hessgiss.de" target="_blank">
+            <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/hessgis_gruen.png'" />
           </a>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div class="col-md-4 hidden-xs">
+    <div class="portlet">
+        <div class="portlet-header"></div>
+        <h1>FAQs</h1>
+        <div class="portlet-body">
+          
+          <a class="portletlink"
+                href="http://www.dguv.de/landesverbaende/de/datenbanken/index.jsp">
+                <p>- Durchgangsärzte (DGUV)</p>
+            </a>
+    <!--
+            <a  class="portletlink"
+                href="http://www.inform-im-netz.de">
+                <img src="fanstatic/ukhtheme.resources/images/inform-im-netz.png"
+                title="inform" />
+            </a>
+            <a class="portletlink"
+                href="http://www.ukh.de/informationen/sibe-reportarchiv/">
+                <img src="fanstatic/ukhtheme.resources/images/sibe-report.png"
+                title="SiBe-Report" />
+            </a>
+            <a class="portletlink"
+                href="http://www.ukh.de/presse/pressemitteilungen/">
+                <img src="/fanstatic/ukhtheme.resources/images/pressemeldungen.png"
+                title="Pressemeldungen" />
+            </a>
+    -->
+        </div>
+        <div class="portlet-footer"></div>
+    </div>
+    <!--
+    <div class="portlet">
+        <div class="portlet-header"></div>
+        <h1>Immer aktuell...</h1>
+        <div class="portlet-body">
+            <p>Abonnieren Sie unseren monatlichen Newsletter</p>
+            <a  class="portletlink"
+                href="http://www.ukh.de/informationen/newsletter-abonnieren/">
+                <img src="fanstatic/ukhtheme.resources/images/newsletter_abo.png"
+                title="Newsletter" />
+            </a>
+        </div>
+        <div class="portlet-footer"></div>
+    </div>
+    <div class="portlet">
+        <div class="portlet-header"></div>
+        <h1>Downloads</h1>
+        <div class="portlet-body">
+            <a class="portletlink"
+                href="http://www.ukh.de/downloads/taxi-gutscheine-fuer-schulen/">
+                <p>- Taxi-Gutscheine für Schulen</p>
+            </a>
+        </div>
+        <div class="portlet-footer"></div>
+    </div>
+    <div class="portlet">
+        <div class="portlet-header"></div>
+        <h1>Informationen</h1>
+        <div class="portlet-body">
+            <a class="portletlink"
+                href="http://www.dguv.de/landesverbaende/de/datenbanken/index.jsp">
+                <p>- Durchgangsärzte (DGUV)</p>
+            </a>
+        </div>
+        <div class="portlet-footer"></div>
+    </div>
+    -->
+</div>
+
+
+
+
+
+
+
+
+
+
 </div>
