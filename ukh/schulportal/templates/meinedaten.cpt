@@ -1,0 +1,33 @@
+<div tal:define="daten view.daten">
+  <h1> Schuldaten </h1>
+  <h2> Schulnummer </h2>
+  <p tal:content="daten['enrlfd']"> </p>
+
+  <h2> Adresse </h2>
+  <p tal:content="daten['nz1']"> </p>
+  <p tal:content="daten['nz2']"> </p>
+  <p tal:content="daten['nz3']"> </p>
+  <p tal:content="daten['nz4']"> </p>
+
+  <h2> Kontaktdaten </h2>
+  <p>Telefon:</p>
+  <p tal:content="daten['tel']"> </p>
+  <p>Fax:</p>
+  <p tal:content="daten['fax']"> </p>
+  <p>E-Mail:</p>
+  <p tal:content="daten['mail']"> </p>
+
+
+<!--
+  <pre tal:content="daten"> </pre>
+-->
+
+
+
+
+
+
+
+
+
+</div>
