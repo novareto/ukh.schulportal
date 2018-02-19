@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2007-2011 NovaReto GmbH
-# cklinger@novareto.de 
+# cklinger@novareto.de
 
 from zope.interface import Interface
 from zope.schema import TextLine, Choice
@@ -13,7 +13,7 @@ class IStammdaten(Interface):
             title = u"Anrede",
             values = ('Herr', 'Frau'),
             )
-            
+
     titel = TextLine(
             title = u"Titel",
             required = False,
@@ -26,7 +26,7 @@ class IStammdaten(Interface):
     nname = TextLine(
             title = u"Nachname"
             )
-            
+
     funktion = TextLine(
             title = u"Funktion",
             )

@@ -12,7 +12,7 @@
   <div tal:define="links viewlet.links()" tal:condition="links" style="margin-top: 20px" class="col-md-4">
     <ul class="pull-right list-unstyled">
       <li>
-        <a href="" tal:attributes="href links['profile']" class="btn2">Mein Profil</a>
+        <a href="" tal:attributes="href links['profile']" class="btn2"> <span tal:content="viewlet.MyTitle()"/> </a>
       </li>
       <li>
         <br/>

@@ -39,6 +39,20 @@ class UserManagement(grok.GlobalUtility):
         session.execute(sql)
         mark_changed(session)
 
+    def updUserStamm(self, **kwargs):
+        """Updates a User"""
+        mnr, az = self.zerlegUser(uvcsite.getPrincipal().id)
+        session = Session()
+        sql = users.update().where(
+            and_(users.c.login == mnr, users.c.az == az)
+            ).values(vname=kwargs.get('vname'), nname=kwargs.get('nname'),
+                     vwhl=kwargs.get('vwhl'), tlnr=kwargs.get('tlnr'),
+                     anr=kwargs.get('anr'), funktion=kwargs.get('funktion'),
+                     titel=kwargs.get('titel'), email=kwargs.get('email'),
+                     )
+        session.execute(sql)
+        mark_changed(session)
+
     def deleteUser(self, cn):
         mnr, az = self.zerlegUser(cn)
         session = Session()
@@ -51,6 +65,7 @@ class UserManagement(grok.GlobalUtility):
         mnr, az = self.zerlegUser(kw['mnr'])
         user = self.getUser(mnr)
         session = Session()
+        import pdb; pdb.set_trace()
         sql = users.insert(dict(
             login=mnr,
             passwort=kw.get('passwort'),
@@ -72,10 +87,19 @@ class UserManagement(grok.GlobalUtility):
     def getUser(self, mnr):
         """Return a User"""
         mnr, az = self.zerlegUser(mnr)
+        if mnr == "servicetelefon":
+            return User(
+                mnr="servicetelefon",
+                az=00,
+                oid="ukh",
+                email="servicetelefon@ukh.de",
+                passwort="ukh",
+                rollen=[],
+                )
+
         session = Session()
         query = session.query(users).filter(
             users.c.login == mnr, users.c.az == az)
-
         if query.count() == 1:
             result = query.one()
             az = result.az
@@ -86,8 +110,15 @@ class UserManagement(grok.GlobalUtility):
                 mnr=result.login,
                 az=az,
                 oid=result.oid,
-                email=result.email,
-                passwort=result.passwort,
+                nname=result.nname.strip(),
+                vname=result.vname.strip(),
+                vwhl=result.vwhl.strip(),
+                tlnr=result.tlnr.strip(),
+                anr=result.anr.strip(),
+                funktion=result.funktion.strip(),
+                titel=result.titel.strip(),
+                email=result.email.strip(),
+                passwort=result.passwort.strip(),
                 rollen=result.rollen.strip().split(','))
         return None
 
@@ -128,6 +159,13 @@ class UserManagement(grok.GlobalUtility):
 
     def updatePasswort(self, **kwargs):
         """Change a passwort from a user"""
+        mnr, az = self.zerlegUser(uvcsite.getPrincipal().id)
+        session = Session()
+        sql = users.update().where(
+            and_(users.c.login == mnr, users.c.az == az)
+            ).values(passwort=kwargs.get('passwort'),)
+        session.execute(sql)
+        mark_changed(session)
 
     def checkRule(self, login):
         uvcsite.log(login)
@@ -148,6 +186,8 @@ class UKHPrincipal(Principal):
 
     @property
     def title(self):
+        if self.id == "servicetelefon-0":
+            return u"ServiceTelefon"
         return self.getAdresse().get('iknam1', self.id)
 
     def getUM(self):
@@ -169,6 +209,8 @@ class UKHPrincipal(Principal):
         Holt die Adresse und die Bankverbindung aus der Datenbank
         """
         id = self.id
+        if id == "servicetelefon-0":
+            return {'iknam1': 'Service Telefon'}
         oid = self.getOID(id)
         session = Session()
         s = select([einrichtungen], and_(einrichtungen.c.enrrcd == str(oid)))

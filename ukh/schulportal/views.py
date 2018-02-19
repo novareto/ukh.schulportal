@@ -9,7 +9,9 @@ import uvcsite
 from megrok import resourceviewlet
 from resources import ukhcss, ukhjs
 from zope.interface import Interface
+from zope.component import getUtility
 from uvc.layout.slots.managers import Footer
+from uvcsite.extranetmembership.interfaces import IUserManagement
 from zope.authentication.interfaces import IUnauthenticatedPrincipal
 from uvcsite.content.productregistration import getProductRegistrations
 
@@ -54,6 +56,19 @@ class LandingPage(uvcsite.Page):
 
     def getHomeFolder(self):
         return uvcsite.getHomeFolderUrl(self.request)
+
+    def update(self):
+        um = getUtility(IUserManagement)
+        account = um.getUser(self.request.principal.id)
+        print account.keys()
+        if account:
+            if (account.get('tlnr', '').strip() == "" 
+                    or account.get('vwhl', '').strip() == ""
+                    or account.get('nname', '').strip() == ""
+                    or account.get('email', '').strip() == ""
+                    or account.get('vname', '').strip() == ""):
+                self.redirect(
+                    uvcsite.getHomeFolderUrl(self.request, 'stammdaten'))
 
 
 class StartMenu(uvcsite.MenuItem):
@@ -131,11 +146,25 @@ class ProductFolderValues(ProductFolderValues):
         return [x for x in values if not IVerbandbuchEintrag.providedBy(x)]
 
 
+from ukhtheme.grok.layout import ILayer
+from uvc.letterbasket.interfaces import ILetterBasket
+
+
 class UAZVBIndex(Index):
-    grok.context(SUnfallanzeigen)
+    grok.layer(ILayer)
 
     @property
     def title(self):
+        if ILetterBasket.providedBy(self.context):
+            return "Postfach"
         if self.request.form.get('filter', '') == 'vb':
             return u"Verbandbuch"
         return u"Unfallanzeigen"
+
+    def addButton(self):
+        if ILetterBasket.providedBy(self.context):
+            return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, '@@add')
+        if self.request.form.get('filter', '') == 'vb':
+            return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'addverbandbuch')
+        return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'add')
+        return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'add')

@@ -21,13 +21,18 @@ class BGHeader(BGHeader):
     grok.layer(ILayer)
     template = get_template(templates_dir, 'bgheader.cpt')
 
+    def MyTitle(self):
+        if '-' in self.request.principal.id:
+            return "Mein Profil"
+        return "Benutzerverwaltung"
+
     def welcome(self):
         pr = self.request.principal
-        if pr.title == u'Unauthenticated User':
-            return ""
-        adr = pr.getAdresse()
-        name = adr.get('iknam1', '')
-        return "<h3>Herzlich Willkommen</h3> <p> %s </p>" % name
+        if hasattr(pr, 'getAdresse'):
+            adr = pr.getAdresse()
+            name = adr.get('iknam1', '')
+            return "<h3>Herzlich Willkommen</h3> <p> %s </p>" % name
+        return ""
 
     def links(self):
         rc = {}
@@ -172,21 +177,3 @@ class Tabs(Tabs):
 
     def render(self):
         return ""
-
-
-class QuickAdd(grok.Viewlet):
-    grok.viewletmanager(uvcsite.IAboveContent)
-    grok.context(SUnfallanzeigen)
-
-    def render(self):
-        if self.request.form.get('filter', '') == 'vb':
-            return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.view.url(self.context, 'addverbandbuch')
-        return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.view.url(self.context, 'add')
-
-
-class QuickAddLB(grok.Viewlet):
-    grok.viewletmanager(uvcsite.IAboveContent)
-    grok.context(LetterBasket)
-
-    def render(self):
-        return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.view.url(self.context, '@@add')

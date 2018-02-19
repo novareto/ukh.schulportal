@@ -3,6 +3,8 @@ import uvcsite
 
 from .interfaces import IStammdaten
 from zeam.form.base import DictDataManager
+from uvcsite.extranetmembership.interfaces import IUserManagement
+from zope.component import getUtility
 
 
 class StammdatenMenu(uvcsite.MenuItem):
@@ -37,15 +39,20 @@ class Stammdaten(uvcsite.Form):
 
     def __init__(self, context, request):
         super(Stammdaten, self).__init__(context, request)
-        self.setContentData(self.request.principal.getAdresse())
+        um = getUtility(IUserManagement)
+        user = um.getUser(self.request.principal.id)
+        self.setContentData(user)
 
     @uvcsite.action(u'Speichern')
     def handle_save(self):
         data, errors = self.extractData()
-        #import pdb; pdb.set_trace()
         if errors:
             self.flash('Es sind Fehler aufgetreten.')
             return
+        um = getUtility(IUserManagement)
+        um.updUserStamm(**data)
+        self.flash('Ihre Daten wurden gespeichert.')
+        self.redirect(self.application_url())
 
     @uvcsite.action(u'Abbrechen')
     def handle_cancel(self):

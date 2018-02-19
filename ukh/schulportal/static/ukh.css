@@ -187,6 +187,10 @@ ul#main-nav li.active a, ul#main-nav li a:hover {
   margin-left: 5px;
 }
 
+.btn {
+    padding: 5px 10px;
+}
+
 .btn2 {
   width: 200px;
     background-color: #FAFAFA;
