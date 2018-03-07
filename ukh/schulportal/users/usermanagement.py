@@ -16,6 +16,52 @@ from zope.sqlalchemy import mark_changed
 from sqlalchemy.sql import select
 from zope.component import getUtility
 from uvc.cache import cache_me
+from zope.schema import Set, TextLine, Choice, Password
+from uvcsite.extranetmembership.vocabulary import vocab_berechtigungen
+
+
+class IUKHMember(IExtranetMember):
+
+    mnr = TextLine(
+        title=u"Benutzername",
+        description=u"Der Benutzername wird automatisch vergeben.",
+        required=True
+    )
+
+    nname = TextLine(
+        title=u"Name",
+        description=u"Name",
+        required=True
+    )
+
+    vname = TextLine(
+        title=u"Vorname",
+        description=u"Vorname",
+        required=True
+    )
+
+    rollen = Set(
+        title=u"Berechtigung",
+        description=u"Wählen Sie die Bereiche aus, auf die der Mitbenutzer Zugriff haben soll.",
+        value_type=Choice(source=vocab_berechtigungen),
+        required=False
+    )
+
+    passwort = Password(
+        title=u"Passwort",
+        description=u"Bitte vergeben Sie hier ein neues Passwort für den Mitbenutzer",
+        min_length=5,
+        max_length=8,
+        required=True
+    )
+
+    confirm = Password(
+        title=u"Bestätigung",
+        description=u"Bitte bestätigen Sie das eingegebene Passwort des Mitbenutzers.",
+        min_length=5,
+        max_length=8,
+        required=True
+    )
 
 
 class User(dict):
@@ -26,7 +72,7 @@ class UserManagement(grok.GlobalUtility):
     """ Utility for Usermanagement """
     grok.implements(IUserManagement)
 
-    UserInterface = IExtranetMember
+    UserInterface = IUKHMember
 
     def updUser(self, **kwargs):
         """Updates a User"""
@@ -35,7 +81,7 @@ class UserManagement(grok.GlobalUtility):
         session = Session()
         sql = users.update().where(
             and_(users.c.login == mnr, users.c.az == az)
-            ).values(passwort=kwargs.get('passwort'), rollen=','.join(kwargs.get('rollen')))
+            ).values(passwort=kwargs.get('passwort'), rollen=','.join(kwargs.get('rollen')), nname=kwargs.get('nname'), vname=kwargs.get('vname'))
         session.execute(sql)
         mark_changed(session)
 
@@ -65,14 +111,15 @@ class UserManagement(grok.GlobalUtility):
         mnr, az = self.zerlegUser(kw['mnr'])
         user = self.getUser(mnr)
         session = Session()
-        import pdb; pdb.set_trace()
         sql = users.insert(dict(
             login=mnr,
             passwort=kw.get('passwort'),
             az=az,
             email=kw.get('email', ''),
             oid=str(user['oid']),
-            rollen=','.join(kw.get('rollen', []))
+            rollen=','.join(kw.get('rollen', [])),
+            vname=kw.get('vname', ''),
+            nname=kw.get('nname', ''),
             )
         )
         session.execute(sql)
@@ -154,12 +201,20 @@ class UserManagement(grok.GlobalUtility):
                 continue
             usr = "%s-%s" % (x.login, x.az)
             ret.append(User(
-                cn=usr, mnr=x.login, rollen=x.rollen.strip().split(','), az=x.az))
+                cn=usr,
+                mnr=x.login,
+                rollen=x.rollen.strip().split(','),
+                az=x.az,
+                vname=x.vname,
+                nname=x.nname))
         return ret
 
     def updatePasswort(self, **kwargs):
         """Change a passwort from a user"""
-        mnr, az = self.zerlegUser(uvcsite.getPrincipal().id)
+        user_id = kwargs.get('mnr')
+        if not user_id:
+            user_id = uvcsite.getPrincipal().id
+        mnr, az = self.zerlegUser(user_id)
         session = Session()
         sql = users.update().where(
             and_(users.c.login == mnr, users.c.az == az)

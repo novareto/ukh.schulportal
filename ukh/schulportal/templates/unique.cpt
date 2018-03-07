@@ -6,8 +6,8 @@
 	     tal:content="structure menuitem.title" />
 	</li>
     </tal:menus>
+    </ul>
     <tal:loop repeat="menu viewlet.renderables">
       <span tal:replace="structure menu.render()"> </span>
     </tal:loop>
-  </ul>
 </div>

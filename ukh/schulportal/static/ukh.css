@@ -1,6 +1,6 @@
 
 #globalmenuviewlet {
-    background: none repeat scroll 0 0 #58A618 !important;
+    background: none repeat scroll 0 0 #51AE31 !important;
     padding-left: 0px;
     height: 100% !important;
 }
@@ -20,7 +20,7 @@
 }
 
 #globalmenuviewlet li a {
-    background: none repeat scroll 0 0 #58A618 !important;
+    background: none repeat scroll 0 0 #51AE31 !important;
     padding: 0 10px;
     height: 100% !important;
     text-align: center;
@@ -30,7 +30,7 @@
 }
 
 #globalmenuviewlet li a:hover {
-    background: none repeat scroll 0 0 #58A618 !important;
+    background: none repeat scroll 0 0 #51AE31 !important;
     color: white;
     padding: 0 10px;
 }
@@ -41,11 +41,11 @@
 }
 
 h1 {
-    color: #58A618;
+    color: #51AE31;
 }
 
 h2 {
-    color: #58A618;
+    color: #51AE31;
 }
 
 ul#main-nav li.active a, ul#main-nav li a:hover {
@@ -54,7 +54,7 @@ ul#main-nav li.active a, ul#main-nav li a:hover {
 }
 
 .portlet h1 {
-    color: #58A618;
+    color: #51AE31;
 }
 
 
@@ -188,31 +188,66 @@ ul#main-nav li.active a, ul#main-nav li a:hover {
 }
 
 .btn {
-    padding: 5px 10px;
+  background-color: #FAFAFA;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #FFFFFF 25%, #E6E6E6);
+  background-repeat: no-repeat;
+  border-color: #CCCCCC #CCCCCC #BBBBBB;
+  border-radius: 4px 4px 4px 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 5px 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 }
 
 .btn2 {
   width: 200px;
-    background-color: #FAFAFA;
-    background-image: -moz-linear-gradient(center top , #FFFFFF, #FFFFFF 25%, #E6E6E6);
-    background-repeat: no-repeat;
-    border-color: #CCCCCC #CCCCCC #BBBBBB;
-    border-radius: 4px 4px 4px 4px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 13px;
-    line-height: 18px;
-    padding: 2px 10px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  background-color: #FAFAFA;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #FFFFFF 25%, #E6E6E6);
+  background-repeat: no-repeat;
+  border-color: #CCCCCC #CCCCCC #BBBBBB;
+  border-radius: 4px 4px 4px 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 2px 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+
+.btn3 {
+  width: 100px;
+  background-color: #FAFAFA;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #FFFFFF 25%, #E6E6E6);
+  background-repeat: no-repeat;
+  border-color: #CCCCCC #CCCCCC #BBBBBB;
+  border-radius: 4px 4px 4px 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 2px 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 }
 
 #field-form-field-rollen input[type="checkbox"] {
-    margin-left: 0px!important;
+  margin-left: 0px!important;
 }
 
 table.EHtable {
@@ -250,3 +285,73 @@ table.EHtable td {
   text-align: left;
   border: 1px solid #ccc;
 }
+
+
+
+
+.portlet {
+  background-attachment: scroll;
+  background-color: transparent;
+  background-image: url("mbox-gradient-sidebar-center.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  color: #666666;
+  margin: 0 0 15px 20px;
+  padding: 0 15px 15px;
+  position: relative;
+  width: 274px;
+  clear: both;
+}
+
+.portlet-header {
+  background: url("mbox-gradient-sidebar2.png") no-repeat scroll 0 0 transparent;
+  top: 0;
+  height: 9px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.portlet-footer {
+  background: url("mbox-gradient-sidebar-footer.png") no-repeat scroll left top transparent;
+  bottom: 0;
+  height: 9px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.alert-message {
+  background-color: #ffccce;
+  border-color: #f47a80;
+  color: #aa030b;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #000000;
+  background-color: #FFFFFF;
+  background:transparent;
+  opacity: 0.4;
+  border-color: #001e3d;
+}
+
+.btn-primary:hover {
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+.wizard ul li.past .badge {
+  background: #51AE31;
+}
+
+.wizard ul li a {
+    color: #4f4e4e;
+}
+
+
+
+
+

@@ -30,8 +30,11 @@ class BGHeader(BGHeader):
         pr = self.request.principal
         if hasattr(pr, 'getAdresse'):
             adr = pr.getAdresse()
-            name = adr.get('iknam1', '')
-            return "<h3>Herzlich Willkommen</h3> <p> %s </p>" % name
+            #name = adr.get('iknam1', '')
+            n1 = adr.get('iknam1', '').strip()
+            n2 = adr.get('iknam2', '').strip()
+            name = n1 + ' ' + n2
+            return "<h3>Herzlich willkommen</h3> <p> %s </p>" % name
         return ""
 
     def links(self):
@@ -145,8 +148,10 @@ class Unfallanzeige(uvcsite.ProductMenuItem):
         return action
 
 
+
+from uvc.layout.slots.interfaces import IRenderable
 class Postfach(uvcsite.ProductMenuItem):
-    grok.viewletmanager(IQuickLinks)
+    grok.viewletmanager(uvcsite.IQuickLinks)
     grok.context(Interface)
     grok.order(30)
     reg_name = "nachrichten"
@@ -157,6 +162,24 @@ class Postfach(uvcsite.ProductMenuItem):
         action = super(Postfach, self).action
         action = action.replace('/@@add', '')
         return action
+
+
+class PostfachP(uvcsite.ProductMenuItem):
+    grok.viewletmanager(uvcsite.IGlobalMenu)
+    grok.context(Interface)
+    grok.implements(IRenderable)
+    grok.order(30)
+    reg_name = "nachrichten"
+    title = "Postfach"
+
+    @property
+    def action(self):
+        action = super(PostfachP, self).action
+        action = action.replace('/@@add', '')
+        return action
+
+    def render(self):
+        return "<ul id='main-nav' class='list-unstyled nav pull-right'> <li> <a href='%s'> <img src='/fanstatic/ukh.schulportal/mail_icon_weiss.png'/>  </a> </li> </ul>" % self.action
 
 
 class MeinDaten(uvcsite.MenuItem):

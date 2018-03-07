@@ -163,8 +163,18 @@ class UAZVBIndex(Index):
 
     def addButton(self):
         if ILetterBasket.providedBy(self.context):
-            return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, '@@add')
+            return '<a class="btn" href="%s"> Neue Nachricht </a>' % self.url(self.context, '@@add')
         if self.request.form.get('filter', '') == 'vb':
             return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'addverbandbuch')
         return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'add')
         return '<a class="btn" href="%s"> Neuer Eintrag </a>' % self.url(self.context, 'add')
+
+
+from uvc.staticcontent.staticmenuentries import PersonalPanelTemplate
+from uvc.layout.slots.menus import PersonalMenuTemplate
+
+class PersonalMenuTemplate(PersonalMenuTemplate):
+    grok.layer(ILayer)
+
+class PersonalPanelTemplate(PersonalPanelTemplate):
+    grok.layer(ILayer)

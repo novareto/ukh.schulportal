@@ -37,3 +37,4 @@ schema_name3 = "educusadat"
 
 users = Table('z1ehr1aa_t', metadata, schema=schema_name, autoload=True, autoload_with=engine)
 einrichtungen = Table('z1ehr1ac_t', metadata, schema=schema_name, autoload=True, autoload_with=engine)
+traegeruaz = Table('mitrg1aa', metadata, schema=schema_name3, autoload=True, autoload_with=engine)
