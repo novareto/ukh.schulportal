@@ -14,6 +14,8 @@ from ukhtheme.grok.viewlets import BGHeader
 from ukh.spsuaz.components import SUnfallanzeigen
 from uvc.letterbasket.components import LetterBasket
 
+from ukh.schulportal.layout import ISchulportalLayer as ILayer
+
 templates_dir = path.join(path.dirname(__file__), 'templates')
 
 
@@ -82,7 +84,7 @@ class UniqueNavigation(grok.Viewlet):
         for amenu in menus:
             for menu in amenu:
                 am.append(menu)
-        self.smenus = sorted(am, key=lambda item: item['order'])
+        self.smenus = sorted(am, key=lambda item: item.get('order', 1))
         self.renderables = globalmenu.getRenderableItems()
 
     def render(self):

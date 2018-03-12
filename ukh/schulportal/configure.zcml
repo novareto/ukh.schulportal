@@ -4,7 +4,7 @@
   <include package="grok" />
   <include package="ukhtheme.grok" />
   <include package="uvc.cache" />
-  <browser:defaultSkin name="ukhtheme" />
   <grok:grok package="." />
+  <browser:defaultSkin name="ukh_schulportaltheme" />
 </configure>
 
