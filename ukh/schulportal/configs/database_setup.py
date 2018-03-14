@@ -20,6 +20,10 @@ from sqlalchemy import Table, MetaData, create_engine
 config = getProductConfiguration('database')
 DSN = config['dsn']
 print DSN
+USER_TABLE = config['user_table']
+ENR_TABLE = config['enr_table']
+TRG_TABLE = config['trg_table']
+
 
 engine_factory = EngineFactory(DSN, echo=False)
 scoped_session = GloballyScopedSession()

@@ -4,6 +4,7 @@
   <include package="grok" />
   <include package="ukhtheme.grok" />
   <include package="uvc.cache" />
+  <include package="zope.app.locales" />
   <browser:defaultSkin name="ukhtheme" />
   <grok:grok package="." />
 </configure>

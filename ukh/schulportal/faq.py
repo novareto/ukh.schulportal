@@ -234,6 +234,9 @@ dass es sich um einen Schulunfall handelte. So können eventuell doch noch entst
 <p>
 Auch hierfür ist im Schulportal ein <b>„elektronisches Verbandbuch“</b> für die hessischen Schulen eingerichtet.
 </p>
+<p>
+<b>Sie können übrigens aus einer Verbandbuch-Eintragung jederzeit eine offizielle Unfallmeldung machen.</b>
+</p>
 """
 
 FAQITEMS02 = (

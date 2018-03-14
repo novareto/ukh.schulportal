@@ -6,6 +6,7 @@ from .interfaces import IStammdaten
 from zeam.form.base import DictDataManager
 from uvcsite.extranetmembership.interfaces import IUserManagement
 from zope.component import getUtility
+from ukh.schulportal.resources import userscss
 
 
 grok.templatedir('templates')
@@ -37,7 +38,7 @@ class Stammdaten(uvcsite.Form):
     fields['nname'].htmlAttributes['maxlength'] = 50
     fields['funktion'].htmlAttributes['maxlength'] = 50
     fields['email'].htmlAttributes['maxlength'] = 70
-    fields['vwhl'].htmlAttributes['maxlength'] = 20
+    fields['vwhl'].htmlAttributes['maxlength'] = 6
     fields['tlnr'].htmlAttributes['maxlength'] = 20
 
     def __init__(self, context, request):
@@ -45,6 +46,7 @@ class Stammdaten(uvcsite.Form):
         um = getUtility(IUserManagement)
         user = um.getUser(self.request.principal.id)
         self.setContentData(user)
+        #userscss.need()
 
     @property
     def macros(self):

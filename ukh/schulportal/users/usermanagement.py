@@ -49,7 +49,7 @@ class IUKHMember(IExtranetMember):
 
     passwort = Password(
         title=u"Passwort",
-        description=u"Bitte vergeben Sie hier ein neues Passwort für den Mitbenutzer",
+        description=u"Bitte vergeben Sie hier ein neues Passwort für den Mitbenutzer (5-8 Zeichen)",
         min_length=5,
         max_length=8,
         required=True
@@ -120,6 +120,7 @@ class UserManagement(grok.GlobalUtility):
             rollen=','.join(kw.get('rollen', [])),
             vname=kw.get('vname', ''),
             nname=kw.get('nname', ''),
+            merkmal='E',
             )
         )
         session.execute(sql)

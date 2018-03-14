@@ -66,7 +66,25 @@
         </div>
       </div>
 
+      <div class="col-md-4">
+        <a target="_blank" href="/fanstatic/ukh.schulportal/Taxi-Gutscheinverfahren.pdf">
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/UKH_Piktos_Erklaerfilm_Mitgliederportal.svg'" />
+          <h3><center>Interner Bereich - kurz erklärt!</center></h3>
+        </a>
+      </div>
+
+
+
+
+
     </div>
+
+
+    <div class="row ">
+      <br>
+    </div>
+
+
 
 
   </div>
@@ -159,7 +177,7 @@
           </a>
           <a class="portletlink"
                  href="" tal:attributes="href view.application_url() + '/faq04'">
-                <p>- Wer braucht HessGiss?</p>
+                <p>- Wer braucht HessGISS?</p>
           </a>
           <a class="portletlink"
                 href="http://www.dguv.de/landesverbaende/de/datenbanken/index.jsp" target="_blank">
@@ -169,4 +187,20 @@
         <div class="portlet-footer"></div>
     </div>
   </div>
+
+
+
+
+    <div class="row ">
+      <div class="col-md-12">
+        <p>
+          Fragen zur technischen Bedienung der Schulportal-Anwendungen?
+          Bitte wenden Sie sich an <a href="mailto:techniksupport@ukh.de"> techniksupport@ukh.de </a>
+        </p>
+      </div>
+    </div>
+
+
+
+
 </div>

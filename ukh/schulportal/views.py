@@ -60,7 +60,6 @@ class LandingPage(uvcsite.Page):
     def update(self):
         um = getUtility(IUserManagement)
         account = um.getUser(self.request.principal.id)
-        print account.keys()
         if account:
             if (account.get('tlnr', '').strip() == "" 
                     or account.get('vwhl', '').strip() == ""

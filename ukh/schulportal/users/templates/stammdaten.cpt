@@ -1,5 +1,7 @@
+<h1>Meine Daten</h1>
+<p>Tragen Sie hier bitte Ihre Kontaktdaten ein.</p>
+
 <fieldset>
-  <legend tal:content="view.label" />
   <form tal:attributes="action request.URL" method="POST" novalidate="novalidate" id="stammdaten">
     <div class="step-fields" tal:define="W view.fieldWidgets" tal:condition="W">
       <div class="row">

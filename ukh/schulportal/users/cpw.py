@@ -26,14 +26,14 @@ Ihr UKH-Team
 TEXT_CONFIRM = u"""
 Sehr geehrte Damen und Herren,
 
-kürzlich wurde das Passwort für Ihren Zugang zum UKH-Schul-Portal geändert.
+kürzlich wurde das Passwort für Ihren Zugang zum UKH-Schulportal geändert.
 Benutzername: %s
 
 Wenn Sie diese Passwortänderung nicht angefordert haben, wenden Sie sich bitte an das UKH-Team.
 
 
 Web: http://www.ukh.de
-E-Mail: extranet@kuvb.de
+E-Mail: ukh@ukh.de
 
 Ihr UKH-Team
 
@@ -60,7 +60,7 @@ class PasswordActions(grok.JSON):
         mail = self.request.form.get('email')
         hash = self.request.form.get('hash_value')
         text = TEXT % (user, hash)
-        send_mail('extranet@ukh.de', (mail, 'ck@novareto.de'), u"UKH Schulportal Passwortänderung", text)
+        send_mail('schulportal@ukh.de', (mail, 'ck@novareto.de'), u"UKH Schulportal Passwortänderung", text)
         return {'success': 'true'}
 
     def set_user(self):
@@ -76,5 +76,5 @@ class PasswordActions(grok.JSON):
         mail = self.request.form.get('email')
         text = TEXT_CONFIRM % (user)
         userobject = self.um.getUser(user)
-        send_mail('extranet@ukh.de', (userobject['email'], 'ck@novareto.de'), u"UKH Schulportal Passwortänderung", text)
+        send_mail('schulportal@ukh.de', (userobject['email'], 'ck@novareto.de'), u"UKH Schulportal Passwortänderung", text)
         return {'success': 'true'}

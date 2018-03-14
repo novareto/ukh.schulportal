@@ -175,7 +175,7 @@ class PostfachP(uvcsite.ProductMenuItem):
     @property
     def action(self):
         action = super(PostfachP, self).action
-        action = action.replace('/@@add', '')
+        #action = action.replace('/@@add', '')
         return action
 
     def render(self):
