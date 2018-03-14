@@ -67,12 +67,11 @@
       </div>
 
       <div class="col-md-4">
-        <a target="_blank" href="/fanstatic/ukh.schulportal/Taxi-Gutscheinverfahren.pdf">
+        <a tal:attributes="href view.getHomeFolder() + '/videoview'" >
           <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/UKH_Piktos_Erklaerfilm_Mitgliederportal.svg'" />
           <h3><center>Interner Bereich - kurz erklärt!</center></h3>
         </a>
       </div>
-
 
 
 
