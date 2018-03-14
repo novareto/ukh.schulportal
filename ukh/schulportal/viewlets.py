@@ -85,6 +85,7 @@ class UniqueNavigation(grok.Viewlet):
             for menu in amenu:
                 am.append(menu)
         self.smenus = sorted(am, key=lambda item: item.get('order', 1))
+        self.smenus.reverse()
         self.renderables = globalmenu.getRenderableItems()
 
     def render(self):
