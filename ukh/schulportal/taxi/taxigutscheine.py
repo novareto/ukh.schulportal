@@ -7,7 +7,7 @@ import zope.component
 from zope.interface import Interface
 from zope import schema
 from zope.session.interfaces import ISession
-from resources import taxicss, taxijs
+from ukh.schulportal.resources import taxicss, taxijs
 from zeam.form.base import NO_VALUE, Error
 from time import strptime
 

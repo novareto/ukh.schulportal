@@ -4,7 +4,7 @@ import grok
 
 from z3c.saconfig import Session
 from zope.interface import Interface
-from configs.database_setup import users
+from database_setup import users
 
 
 class CheckDatabaseConnectivity(grok.View):
