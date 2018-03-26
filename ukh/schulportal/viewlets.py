@@ -20,7 +20,7 @@ templates_dir = path.join(path.dirname(__file__), 'templates')
 
 
 class BGHeader(BGHeader):
-    grok.layer(ILayer)
+#    grok.layer(ILayer)
     template = get_template(templates_dir, 'bgheader.cpt')
 
     def MyTitle(self):

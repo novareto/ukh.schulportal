@@ -172,8 +172,15 @@ class UAZVBIndex(Index):
 from uvc.staticcontent.staticmenuentries import PersonalPanelTemplate
 from uvc.layout.slots.menus import PersonalMenuTemplate
 
+
 class PersonalMenuTemplate(PersonalMenuTemplate):
     grok.layer(ILayer)
 
+
 class PersonalPanelTemplate(PersonalPanelTemplate):
     grok.layer(ILayer)
+
+
+class VideoView(uvcsite.Page):
+    grok.context(Interface)
+    grok.name('videoview')
