@@ -46,6 +46,29 @@ class MeineDaten(uvcsite.Page):
         return dat
 
 
+from zope.traversing.interfaces import IBeforeTraverseEvent
+from zope.authentication.interfaces import IUnauthenticatedPrincipal
+@grok.subscribe(IBeforeTraverseEvent)
+def redirect_on_empty_props(event):
+    principal = event.request.principal
+    if IUnauthenticatedPrincipal.providedBy(principal):
+        return
+    if 'stammdaten' in event.request.environment.get('PATH_INFO'):
+        return
+    #if event.request.getTraversalStack()[0] == "stammdaten":
+    #    return
+    um = getUtility(IUserManagement)
+    account = um.getUser(principal.id)
+    if account:
+        if (account.get('tlnr', '').strip() == "" 
+                or account.get('vwhl', '').strip() == ""
+                or account.get('nname', '').strip() == ""
+                or account.get('email', '').strip() == ""
+                or account.get('vname', '').strip() == ""):
+            event.request.response.redirect(
+                uvcsite.getHomeFolderUrl(event.request, 'stammdaten'))
+
+
 class LandingPage(uvcsite.Page):
     grok.context(uvcsite.IUVCSite)
     grok.name('index')
@@ -57,7 +80,7 @@ class LandingPage(uvcsite.Page):
     def getHomeFolder(self):
         return uvcsite.getHomeFolderUrl(self.request)
 
-    def update(self):
+    def updatei(self):
         um = getUtility(IUserManagement)
         account = um.getUser(self.request.principal.id)
         if account:
