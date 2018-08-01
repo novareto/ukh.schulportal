@@ -55,12 +55,14 @@ def redirect_on_empty_props(event):
         return
     if 'stammdaten' in event.request.environment.get('PATH_INFO'):
         return
+    if event.request.principal.id == u'servicetelefon-0':
+        return
     #if event.request.getTraversalStack()[0] == "stammdaten":
     #    return
     um = getUtility(IUserManagement)
     account = um.getUser(principal.id)
     if account:
-        if (account.get('tlnr', '').strip() == "" 
+        if (account.get('tlnr', '').strip() == ""
                 or account.get('vwhl', '').strip() == ""
                 or account.get('nname', '').strip() == ""
                 or account.get('email', '').strip() == ""
@@ -84,7 +86,7 @@ class LandingPage(uvcsite.Page):
         um = getUtility(IUserManagement)
         account = um.getUser(self.request.principal.id)
         if account:
-            if (account.get('tlnr', '').strip() == "" 
+            if (account.get('tlnr', '').strip() == ""
                     or account.get('vwhl', '').strip() == ""
                     or account.get('nname', '').strip() == ""
                     or account.get('email', '').strip() == ""
