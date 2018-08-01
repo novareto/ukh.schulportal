@@ -174,6 +174,7 @@ from uvc.letterbasket.interfaces import ILetterBasket
 
 class UAZVBIndex(Index):
     grok.layer(ILayer)
+    sortOrder = "descending"
 
     @property
     def title(self):
