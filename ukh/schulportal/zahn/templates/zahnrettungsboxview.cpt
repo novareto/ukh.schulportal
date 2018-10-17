@@ -1,0 +1,96 @@
+<h1>Zahnrettungsbox kostenfrei anfordern</h1>
+<p>Füllen Sie bitte die nachfolgenden Felder aus und wählen Sie dann "Zahnrettungsbox anfordern" um eine kostenfreie Zahnrettungsbox per E-Mail anzufordern.</p>
+<fieldset>
+<form class="form-horizontal" enctype="multipart/form-data" method="post" novalidate="novalidate" action="" tal:attributes="action request.URL">
+<div class="row col-md-12">
+    <div class="row ">
+      <br>
+    </div>
+    <div class="row ">
+      <div class="col-md-6">
+        <h4>Adresse der Schule</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>Ansprechpartner</h4>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.adrname1')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.anspname1')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.adrname2')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.anspname2')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.adrname3')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div tal:define="widget view.fieldWidgets.get('form.field.anspname3')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="row ">
+      <br>
+    </div>
+    <div class="col-md-12">
+      <p>Sie haben eine Zahnrettungsbox durch einen Zahnunfall nutzen müssen und brauchen schnell Ersatz?</p>
+      <p>Verraten Sie uns bitte das Unfalldatum und die Art der Zahnverletzung.</p>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="row ">
+      <br>
+    </div>
+    <div class="row ">
+      <div class="col-md-4">
+        <div tal:define="widget view.fieldWidgets.get('form.field.unfalltag')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="row ">
+      <br>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <div tal:define="widget view.fieldWidgets.get('form.field.verletzung')"
+          metal:use-macro="path: context/@@fieldmacros/template/macros/field_inline">
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="row col-md-12">
+    <div class="row ">
+      <br>
+    </div>
+    <div class="row ">
+      <div metal:use-macro="path: context/@@fieldmacros/template/macros/form-actions"></div>
+    </div>
+</div>
+</form>
+</fieldset>
+

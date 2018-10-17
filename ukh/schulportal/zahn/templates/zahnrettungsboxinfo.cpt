@@ -1,0 +1,18 @@
+<h1>Zahnrettungsbox rettet ausgeschlagene Zähne</h1>
+
+<form class="form-horizontal" enctype="multipart/form-data" method="post" novalidate="novalidate" action="" tal:attributes="action request.URL">
+<br/>
+<p>Nicht selten werden bei Schulunfällen die Zähne verletzt. Wichtig zu wissen: Ausgeschlagene Zähne können mit besten Aussichten auf Einheilung zurückgepflanzt werden, schnelles und richtiges Handeln vorausgesetzt</p>
+<br/>
+<p>Ausgeschlagene Zähne lassen sich nur dann retten, wenn sie gewebsverträglich gelagert und möglichst umgehend wieder eingesetzt werden. Eine optimale Lagerung ist mit der Zahnrettungsbox möglich.</p>
+<br/>
+<p>Lesen Sie dazu auch unseren
+  <a target="_blank" href="https://www.ukh.de/uploads/tx_ukhdruckschriften/UKH_Flyer_Zahnrettung_2017.pdf"><font color="#0000FF"> Flyer </font></a>
+   zur Zahnrettungsbox.
+</p>
+
+<br/>
+<p>Nachfolgend können Sie eine neue Zahnrettungsbox kostenfrei anfordern.</p>
+<br/>
+<div metal:use-macro="path: context/@@fieldmacros/template/macros/form-actions"></div>
+</form>
