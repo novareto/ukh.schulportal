@@ -71,7 +71,7 @@
       <br>
     </div>
 
-
+    <!--
     <div class="row ">
       <div class="col-md-4">
         <a tal:attributes="href view.getHomeFolder() + '/zahnrettungsbox'" >
@@ -84,7 +84,7 @@
       <div class="col-md-4">
       </div>
     </div>
-
+    -->
 
     <div class="row ">
       <br>
