@@ -18,8 +18,6 @@
 
     <div tal:condition="'KinderUnfallanzeige' in items.keys() or 'ErsteHilfe' in items.keys()">
       <div class="row ">
-
-
         <div class="col-md-4" tal:condition="item" tal:define="item items.get('KinderUnfallanzeige')">
           <a href="" tal:attributes="href string:${view.application_url()}/selectuaz">
             <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/UKH_Piktos_Mitgliederportal.svg'" />
@@ -38,8 +36,6 @@
             <h3><center>Erste-Hilfe-Kontingent</center></h3>
           </a>
         </div>
-
-
       </div>
     </div>
 
@@ -54,9 +50,6 @@
           <h3><center>Taxi-Gutschein</center></h3>
         </a>
       </div>
-
-
-
       <div tal:condition="'HessGis' in items.keys()">
         <div class="col-md-4" tal:condition="item" tal:define="item items.get('HessGis')">
           <a tal:attributes="href view.getHomeFolder() + '/Hessgis'" >
@@ -65,17 +58,12 @@
           </a>
         </div>
       </div>
-
       <div class="col-md-4">
         <a tal:attributes="href view.getHomeFolder() + '/videoview'" >
           <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/UKH_Piktos_Erklaerfilm_Mitgliederportal.svg'" />
           <h3><center>Interner Bereich - kurz erklärt!</center></h3>
         </a>
       </div>
-
-
-
-
     </div>
 
 
@@ -84,6 +72,23 @@
     </div>
 
 
+    <div class="row ">
+      <div class="col-md-4">
+        <a tal:attributes="href view.getHomeFolder() + '/zahnrettungsbox'" >
+          <img class="img-responsive" src="" tal:attributes="src 'fanstatic/ukh.schulportal/UKH_Piktos_Erste-Hilfe-Kontingent.svg'" />
+          <h3><center>Zahnrettungsbox</center></h3>
+        </a>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+
+
+    <div class="row ">
+      <br>
+    </div>
 
 
   </div>
